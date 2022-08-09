@@ -26,12 +26,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+      run: dotnet test --logger trx --results-directory "TestResults"
     - name: Test Reporter
       uses: dorny/test-reporter@v1.5.0
       with:
           name: .NET Tests                                                                 # Name of the check run which will be created
-          path: TestResults-${{ matrix.dotnet-version }}                                   # Path to test results
+          path: TestResults/*.trx                                                          # Path to test results
           reporter: dotnet-trx                                                             # Format of test results
     - name: Upload entire project as artifact
       uses: actions/upload-artifact@v3
