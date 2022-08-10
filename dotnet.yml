@@ -41,6 +41,19 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- script: dotnet test <test-project> --logger trx --results-directory "TestResults"
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: 'TestResults'
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
