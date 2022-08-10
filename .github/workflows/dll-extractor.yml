@@ -36,5 +36,5 @@ jobs:
     - name: Export compiled dll's
       uses: actions/upload-artifact@v3
       with:
-            name: booking-api-dlls
-            path: Booking.Server/**/*.dll
+            name: test-results
+            path: Booking.Server/**/*.trx
