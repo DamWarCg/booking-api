@@ -52,7 +52,7 @@ steps:
   condition: succeededOrFailed()
   inputs:
     testRunner: VSTest
-    testResultsFiles: '/**/*.trx'
+    testResultsFiles: '**/*.trx'
 
 - task: PublishPipelineArtifact@1
   inputs:
