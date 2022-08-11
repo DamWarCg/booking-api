@@ -13,6 +13,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker HUB'
-    repository: 'booking-api-azure'
+    repository: 'booking-api'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
