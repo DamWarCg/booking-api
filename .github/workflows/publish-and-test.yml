@@ -21,20 +21,22 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+    - name: Publish API (with DB)
+      run: dotnet publish -o "_output" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --logger trx --results-directory "TestResults"
-    - name: Test Reporter
+    - name: Test Report
       uses: dorny/test-reporter@v1.5.0
       with:
           name: .NET Tests                                                                 # Name of the check run which will be created
-          path: ./**/*.trx                                                                 # Path to test results
+          path: TestResults                                                                # Path to test results
           reporter: dotnet-trx                                                             # Format of test results
-    - name: Export compiled dll's
+    - name: Export published build
       uses: actions/upload-artifact@v3
       with:
-            name: booking-api-dlls
-            path: Booking.Server/**/*.dll
+            name: booking-api-publish
+            path: _outputs
