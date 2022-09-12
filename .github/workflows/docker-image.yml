@@ -22,6 +22,11 @@ jobs:
           with:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
+        - name: Download publish artifact
+          uses: Legit-Labs/action-download-artifact@v2.18.0
+          with:
+            workflow: .github/workflows/publish-and-test.yml
+            path: ./publish-artifacts
         - name: Build and push
           uses: docker/build-push-action@v3.1.1
           with:
