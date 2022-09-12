@@ -39,4 +39,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
             name: booking-api-publish
-            path: Booking.Server/_outputs/*
+            path: Booking.Server/_output
