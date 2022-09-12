@@ -33,7 +33,7 @@ jobs:
       uses: dorny/test-reporter@v1.5.0
       with:
           name: .NET Tests                                                                 # Name of the check run which will be created
-          path: Booking.Server/TestResults                                                 # Path to test results
+          path: Booking.Server/TestResults/*                                               # Path to test results
           reporter: dotnet-trx                                                             # Format of test results
     - name: Export published build
       uses: actions/upload-artifact@v3
