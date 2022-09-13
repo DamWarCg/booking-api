@@ -19,7 +19,7 @@ jobs:
           with:
             dotnet-version: 6.0.x
         - name: Publish API (with DB)
-          run: dotnet publish -o "../work/booking-api/booking-api/_output" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
+          run: dotnet publish -o "_output" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
         
         - name: Checkout
           uses: actions/checkout@v3
@@ -34,6 +34,7 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
         - name: Build and push
           run:  |
+                pwd
                 ls -l
                 docker build -t damwar/booking-api:latest .
                 docker push damwar/booking-api:latest
