@@ -24,7 +24,7 @@ steps:
 - script: dotnet publish -o "$(publishPath)" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
   displayName: Dotnet Publish
 
-- script: dotnet test --logger trx --results-directory "$(testPath)"
+- script: dotnet test Booking.Server/ --logger trx --results-directory "$(testPath)"
   displayName: Dotnet Test
 
 - task: PublishTestResults@2
