@@ -27,7 +27,7 @@ jobs:
           with:
             github_token: ${{ secrets.REPO_TOKEN }}
             workflow: .github/workflows/publish-and-test.yml
-            path: Booking.Server/publish-artifact
+            path: ../../Booking.Server/publish-artifact
         - name: Build and push
           uses: docker/build-push-action@v3.1.1
           with:
