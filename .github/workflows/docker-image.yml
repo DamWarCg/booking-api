@@ -26,7 +26,7 @@ jobs:
           uses: Legit-Labs/action-download-artifact@v2.18.0
           with:
             workflow: .github/workflows/publish-and-test.yml
-            path: ./publish-artifacts
+            path: ./publish-artifact
         - name: Build and push
           uses: docker/build-push-action@v3.1.1
           with:
