@@ -23,7 +23,7 @@ jobs:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
         - name: Publish API (with DB)
-          run: dotnet publish -o "_output" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
+          run: dotnet publish -o "_output" "/Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
         - name: Build and push
           uses: docker/build-push-action@v3.1.1
           with:
