@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  Build-push-docker-from-artifact:
+  Build-push-docker:
 
     runs-on: ubuntu-latest
 
@@ -22,12 +22,8 @@ jobs:
           with:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
-        - name: Download publish artifact
-          uses: LexisNexis-Public-GHA/sbs-action-download-artifact@v2.13.1
-          with:
-            github_token: ${{ secrets.REPO_TOKEN }}
-            workflow: .github/workflows/publish-and-test.yml
-            path: ../../Booking.Server/publish-artifact
+        - name: Publish API (with DB)
+          run: dotnet publish -o "_output" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
         - name: Build and push
           uses: docker/build-push-action@v3.1.1
           with:
