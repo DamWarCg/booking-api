@@ -11,7 +11,7 @@ defaults:
     working-directory: Booking.Server
 
 jobs:
-  build:
+  Publish-build-test-export-artifact:
 
     runs-on: ubuntu-latest
 
