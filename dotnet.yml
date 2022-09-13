@@ -8,12 +8,10 @@ trigger:
 
 pool:
   vmImage: 'windows-2022'
-  demands: msbuild -equals 17.0.0
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  publishPath:  '_output'
+  testPath: '_testResults'
 
 steps:
 - task: UseDotNet@2
@@ -23,38 +21,19 @@ steps:
     version: '6.0.x'
     includePreviewVersions: false
 
-- task: NuGetToolInstaller@1
+- script: dotnet publish -o "_output" $(publishPath)
+  displayName: Dotnet Publish
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+- script: dotnet test --logger trx --results-directory "$(testPath)"
+  displayName: Dotnet Test
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: test
-    projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
-- script: dotnet test Booking.Server/ --logger trx
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
     testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    testResultsFiles: '$(testPath)/*.trx'
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myWebsiteName'
+    targetPath: '$(publishPath)' 
+    artifactName: 'dotnetPublish'
