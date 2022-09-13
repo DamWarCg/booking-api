@@ -22,17 +22,12 @@ jobs:
           with:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
-        - name: Prepare directory for artifact
-          run: |
-                sudo su
-                mkdir publish-artifact
         - name: Download publish artifact
           uses: LexisNexis-Public-GHA/sbs-action-download-artifact@v2.13.1
           with:
             github_token: ${{ secrets.REPO_TOKEN }}
             workflow: .github/workflows/publish-and-test.yml
-            name: publish-artifact
-            path: /publish-artifact
+            path: Booking.Server/publish-artifact
         - name: Build and push
           uses: docker/build-push-action@v3.1.1
           with:
