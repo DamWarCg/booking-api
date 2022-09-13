@@ -21,7 +21,7 @@ steps:
     version: '6.0.x'
     includePreviewVersions: false
 
-- script: dotnet publish -o "_output" $(publishPath)
+- script: dotnet publish -o "$(publishPath)" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
   displayName: Dotnet Publish
 
 - script: dotnet test --logger trx --results-directory "$(testPath)"
