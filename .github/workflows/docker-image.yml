@@ -25,8 +25,9 @@ jobs:
         - name: Download publish artifact
           uses: Legit-Labs/action-download-artifact@v2.18.0
           with:
+            github_token: ${{github.workflow-token}}
             workflow: .github/workflows/publish-and-test.yml
-            path: .github/workflows/publish-artifact
+            path: /publish-artifact
         - name: Build and push
           uses: docker/build-push-action@v3.1.1
           with:
