@@ -34,5 +34,6 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
         - name: Build and push
           run:  |
+                ls -l
                 docker build -t damwar/booking-api:latest .
                 docker push damwar/booking-api:latest
