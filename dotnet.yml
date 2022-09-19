@@ -7,25 +7,20 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-2022'
+  vmImage: ubuntu-latest
+
+container: damwar/dotnet-sdk
 
 variables:
   publishPath:  '_output'
   testPath: '_testResults'
 
 steps:
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
-  inputs:
-    packageType: 'sdk'
-    version: '6.0.x'
-    includePreviewVersions: false
+- script: dotnet test Booking.Server/ --logger trx --results-directory "$(testPath)"
+  displayName: Dotnet Test
 
 - script: dotnet publish -o "$(publishPath)" "Booking.Server/Booking.Server.API/Booking.Server.API.csproj"
   displayName: Dotnet Publish
-
-- script: dotnet test Booking.Server/ --logger trx --results-directory "$(testPath)"
-  displayName: Dotnet Test
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
