@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: damwar/dotnet-sdk
+container: damwar/dotnet-sdk:latest
 
 variables:
   publishPath:  '_output'
