@@ -9,7 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: damwarregistry.azurecr.io/sdks/dotnet-sdk:latest
+container: 
+  image: damwarregistry.azurecr.io/sdks/dotnet-sdk:latest
+  endpoint: acr-damwarregistry
 
 variables:
   publishPath:  '_output'
